@@ -55,11 +55,49 @@ Dit staat voor "Left-Hand Side" and "Right-Hand Side" van een **toewijzing**.
 
 LHS is wanneer die aan de linkerkant staat en zoekt de variabele container zelf zodat het dit kan toewijzen. (TARGET)
 RHS is 'niet links' en zoekt dus enkel de waarde. (SOURCE)
-**Voorbeelden!**
-``console.log( a);``
+
+**_Dit "LHS en RHS" betekend dus niet dat deze altijd links of rechts moeten staan_**  
+**Voorbeelden!**  
+``console.log( a );``  
 ``a`` is een RHS referentie want ``a`` heeft geen waarde hier. We zoeken de waarde op zodat deze gegeven kan worden. (SOURCE)
 
-``a = 2;``
+``a = 2;``  
 ``a`` is een LHS regerentie. Het maakt niet uit wat de waarde is, we hoeven hem alleen te vinden om hem de waarde twee gegeven kan worden. (TARGET)
 
-**Dit "LHS en RHS" betekend dus niet dat deze altijd links of rechts moeten staan**
+
+Stuk code met gespreksvoorbeeld:
+```javascript
+function foo(a) {
+  console.log( a ); //2
+}
+
+foo( 2 );
+```
+
+> **Engine:** Hey _Scope_, ik heb een RHS referentie voor ``foo``, ken je dit?  
+> **Scope:** Ja, _Compiler_ heeft het gedeclareerd. Het is een functie.  
+> **Engine:** Top, dan doe ik nu ``foo``  
+> **Engine:** Hey _Scope_ Ik heb een LHS referentie voor ``a``, ken je dit?  
+> **Scope:** Ja, _Compiler_ heeft het als een parameter voor ``foo``  
+> **Engine:** Top, nu ``2`` naar ``a``verwijzen.  
+> **Engine:** Hey _Scope_ ik heb een RHS referentie voor ``console``, ken je dit?  
+> **Scope:** Ja, ``console`` is ingebouwd. Alsjeblieft.  
+> **Engine:** Top, ik zoek ``log()`` op... het is een functie.  
+> **Engine:** Hey _Scope_, ik heb een RHS referentie voor ``a``. Ik ken het maar wil het double-checken.  
+> **Scope:** Ja, zelfde waarde. Niks aangepast.  
+> **Engine:** Top, dan gaat de waarde van ``a``, wat ``2`` is, naar ``log(..)``.  
+
+Als eerst vraagt de _Engine_ om een RHS binnen een functie wanneer een variabele daar is aangeroepen. 
+Dit is een **Nested scope**.  
+Wanneer die niet is gevonden dan vraagt _Engine_ om een RHS buiten deze functie.  
+Dit blijft doorgaan tot hij de **Globale scope** bereikt.  
+
+#### Errors
+
+Wanneer een RHS zoek faalt in de nested _Scopes_ dan is dit een "niet gedeclareerde" variabele, omdat deze niet gevonden is in de _Scope_.  
+Als deze nergens wordt gevonden is dit een ``ReferenceError``.  
+Bij een LHS wanneer de globale _Scope_ bereikt wordt creeert _Scope_ een nieuwe variabele en geeft deze aan de _Engine_.  
+Mocht er iets gedaan worden met een opgehaalde RHS variabele wat niet mogelijk is zoals uitvoeren als functie terwijl het geen functie is komt er een ``TypeError``.  
+``ReferenceError`` is dat _Scope_ oplossing faalt.  
+``TypeError`` is dat een onmogelijke actie wordt uitgevoerd.  
+
