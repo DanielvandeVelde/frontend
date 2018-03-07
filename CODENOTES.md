@@ -1,8 +1,12 @@
 # Notities
 
-Dit zijn de notities die horen bij het boek  
+Dit zijn de notities die horen bij het boek:
+
 **You don't know JS**  
 Door Simpson en Kyle
+
+Dit is een Nederlandse samenvatting gemaakt door en voor mijzelf.  
+Ik raad je daarom ook aan om deze niet zelf te gebruiken en goed je eigen onderzoek te doen.  
 
 ## Inhoudsopgave 
 ### [Scope & Closures](https://github.com/DanielvandeVelde/frontend/tree/master/YDKJS/Scope%20-%20closures)
